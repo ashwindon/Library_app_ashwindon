@@ -17,12 +17,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "auth";
     FirebaseAuth firebaseAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
-    DatabaseReference dref;
+    //dref;
+    private DatabaseReference ref;
     EditText editTextUid,editTextPassword;
     Button buttonSignup;
     @Override
@@ -31,13 +33,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
+        ref = FirebaseDatabase.getInstance().getReference();
+
+
+
         editTextUid = (EditText) findViewById(R.id.editText_email);
         editTextPassword = (EditText) findViewById(R.id.editText2_passwd);
         buttonSignup = (Button) findViewById(R.id.loginbttn);
         buttonSignup.setOnClickListener(this);
 
-        firebaseAuth = FirebaseAuth.getInstance();
 
+        firebaseAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {

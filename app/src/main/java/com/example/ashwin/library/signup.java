@@ -16,17 +16,23 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class signup extends AppCompatActivity implements View.OnClickListener{
     FirebaseAuth firebaseAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
-    DatabaseReference dref;
-    EditText editTextUid,editTextPassword,editTextEmail;
+    // DatabaseReference dref;
+    EditText editTextUid, editTextName, editTextPassword, editTextEmail;
+    int u = 0;
+    private DatabaseReference ref;
     Button buttonSignup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        editTextName = (EditText) findViewById(R.id.input_name);
+
         editTextUid = (EditText) findViewById(R.id.input_uid);
         editTextEmail = (EditText) findViewById(R.id.input_email);
         editTextPassword = (EditText) findViewById(R.id.input_password);
@@ -34,6 +40,10 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
         buttonSignup.setOnClickListener(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+
+        ref = FirebaseDatabase.getInstance().getReference("student");
+
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -46,7 +56,9 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
     private void registerUser(){
         //getting email and password from edit texts
         final String email = editTextEmail.getText().toString().trim();
-        String uid = editTextUid.getText().toString().trim();
+        final String uid = editTextUid.getText().toString().trim();
+
+        u = Integer.parseInt(uid);
         final String password  = editTextPassword.getText().toString().trim();
 
         //checking if email and passwords are empty
@@ -80,13 +92,22 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
                         if(task.isSuccessful()){
                             //display some message here
                             Toast.makeText(signup.this,"Successfully registered",Toast.LENGTH_LONG).show();
+                            ref = FirebaseDatabase.getInstance().getReference("student/ " + String.valueOf(u));
+                            data d = new data();
+                            d.setName(editTextName.getText().toString());
+                            d.setUid(u);
+                            d.setEmail(editTextEmail.getText().toString());
+
+                            ref.child("").setValue(d);
+
                             Intent k = new Intent(signup.this,action.class);
                             startActivity(k);
+                            finish();
                         }else{
                             //display some message here
 
 
-                            Toast.makeText(signup.this,"Registration Error"+email+password, Toast.LENGTH_LONG).show();
+                            Toast.makeText(signup.this, "Registration Error" + " " + task.getException(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
