@@ -3,8 +3,17 @@ package com.example.ashwin.library;
 public class data {
 
     public int uid;
+    public boolean isadmin = false;
     private String name, email;
     private books b1[];
+
+    public boolean isIsadmin() {
+        return isadmin;
+    }
+
+    public void setIsadmin(boolean isadmin) {
+        this.isadmin = isadmin;
+    }
 
     public int getUid() {
         return uid;

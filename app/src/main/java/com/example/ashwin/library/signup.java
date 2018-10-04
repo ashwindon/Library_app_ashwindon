@@ -2,12 +2,15 @@ package com.example.ashwin.library;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +27,8 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
     // DatabaseReference dref;
     EditText editTextUid, editTextName, editTextPassword, editTextEmail;
     int u = 0;
+    boolean isadmin = false;
+
     private DatabaseReference ref;
     Button buttonSignup;
 
@@ -82,7 +87,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
         //displaying a progress dialog
 
 
-
+        Log.d("asd", email);
         //creating a new user
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -91,18 +96,21 @@ public class signup extends AppCompatActivity implements View.OnClickListener{
                         //checking if success
                         if(task.isSuccessful()){
                             //display some message here
-                            Toast.makeText(signup.this,"Successfully registered",Toast.LENGTH_LONG).show();
-                            ref = FirebaseDatabase.getInstance().getReference("student/ " + String.valueOf(u));
+                            FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            Toast.makeText(signup.this, "Successfully registered", Toast.LENGTH_LONG).show();
+                            ref = FirebaseDatabase.getInstance().getReference("student/" + currentFirebaseUser.getUid().toString());
                             data d = new data();
                             d.setName(editTextName.getText().toString());
                             d.setUid(u);
+                            d.setIsadmin(isadmin);
                             d.setEmail(editTextEmail.getText().toString());
+                            Log.d("sads", "asd");
 
                             ref.child("").setValue(d);
 
                             Intent k = new Intent(signup.this,action.class);
                             startActivity(k);
-                            finish();
+                            //finish();
                         }else{
                             //display some message here
 
