@@ -58,13 +58,12 @@
         </android.support.design.widget.TextInputLayout>
 
 
-
         <Button
             android:id="@+id/loginbttn"
             android:layout_width="134dp"
-            android:layout_height="63dp"
-            android:layout_marginTop="32dp"
+            android:layout_height="62dp"
             android:layout_gravity="center"
+            android:layout_marginTop="32dp"
             android:text="Login" />
 
 
@@ -73,18 +72,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Forgot Password?"
+            android:onClick="gotoAdmin"
             android:paddingTop="15dp"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            tools:ignore="OnClick" />
 
 
         <TextView
             android:id="@+id/textView_registerHere"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New User?? Register Here"
-            android:paddingTop="15dp"
             android:onClick="text_msg"
-            android:textAlignment="center"/>
+            android:paddingTop="15dp"
+            android:text="New User?? Register Here"
+            android:textAlignment="center" />
 
 
 

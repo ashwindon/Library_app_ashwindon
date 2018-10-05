@@ -1,6 +1,8 @@
 package com.example.ashwin.library;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText editTextUid,editTextPassword;
     Button buttonSignup;
     boolean isadmin = false;
+
+    MediaPlayer music;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonSignup = (Button) findViewById(R.id.loginbttn);
         buttonSignup.setOnClickListener(this);
 
+        //music = MediaPlayer.create(this, R.raw.evil_morty_theme_full);
 
         firebaseAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -114,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     data d = dataSnapshot.getValue(data.class);
                                     isadmin = d.isIsadmin();
                                     if (isadmin) {
-
+                                        //gotoAdmin();
                                     } else {
                                         Intent i = new Intent(MainActivity.this, action.class);
                                         startActivity(i);
@@ -142,11 +148,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-//    private void loginUser(){
-//
-//    }
-
-
     @Override
     public void onClick(View view) {
         //calling register method on click
@@ -155,7 +156,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void text_msg(View view) {
-        Intent j = new Intent(MainActivity.this,signup.class);
+        Intent j = new Intent(MainActivity.this, signup.class);
         startActivity(j);
+    }
+
+    public void gotoAdmin(View view) {
+        Intent i = new Intent(MainActivity.this, AdminActivity.class);
+        startActivity(i);
     }
 }
