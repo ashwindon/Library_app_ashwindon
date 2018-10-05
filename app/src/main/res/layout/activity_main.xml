@@ -71,9 +71,9 @@
             android:id="@+id/textView_forgotPasswd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Forgot Password?"
             android:onClick="gotoAdmin"
             android:paddingTop="15dp"
+            android:text="Admin Login"
             android:textAlignment="center"
             tools:ignore="OnClick" />
 

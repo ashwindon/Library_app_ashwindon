@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "310358382391-uigu7tibm8lrq1rgs6k03hvj2e8c8hgj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ashwin.library",
+            "certificate_hash": "67859d7e91a1ba9e0db3c499dd64e4a8428d3fc1"
+          }
+        },
+        {
           "client_id": "310358382391-c8qksdjljs3t61ib53ksum07354ilaet.apps.googleusercontent.com",
           "client_type": 3
         }
