@@ -2,9 +2,9 @@ package com.example.ashwin.library;
 
 public class BookInfo {
     public String title, author, image, genre, subgenre, publisher;
-    public int qty = 0;
+    public String qty;
 
-    public BookInfo(String title, String author, String image, String genre, String subgenre, String publisher, int qty) {
+    public BookInfo(String title, String author, String image, String genre, String subgenre, String publisher, String qty) {
         this.title = title;
         this.author = author;
         this.image = image;
@@ -62,11 +62,11 @@ public class BookInfo {
         this.publisher = publisher;
     }
 
-    public int getQty() {
+    public String getQty() {
         return qty;
     }
 
-    public void setQty(int qty) {
+    public void setQty(String qty) {
         this.qty = qty;
     }
 }
